@@ -31,5 +31,5 @@ func main() {
 	userInput, _ := reader.ReadString('\n')
 
 	// Now write the input back to file text.txt
-	file.WriteString(userInput + "  " + (time.Now().Format(time.Kitchen)) + "\n")
+	file.WriteString(userInput + (time.Now().Format(time.Kitchen)) + "\n")
 }
