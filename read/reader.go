@@ -1,4 +1,4 @@
-package main
+package read
 
 import (
 	"fmt"
@@ -9,7 +9,8 @@ import (
 	"github.com/xDarkicex/writer/config"
 )
 
-func main() {
+//Note This is the fucntion to read notes
+func Note() {
 	file, err := os.Open(config.File)
 	if err != nil {
 		log.Fatal(err)
