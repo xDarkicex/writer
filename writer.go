@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
+
+	"github.com/xDarkicex/writer/config"
 )
 
 func main() {
@@ -13,7 +15,7 @@ func main() {
 	// content, create it if it does not exit, use 0666 for permissions
 	// on creation.
 
-	file, _ := os.OpenFile("file.txt", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+	file, _ := os.OpenFile(config.File, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
 
 	// Close the file when the surrounding function exists
 	defer file.Close()
