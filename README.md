@@ -9,6 +9,12 @@ will run gopad note taker write in a quick note
 read them anytime with the read command
 `gopad read`
 
+Running 
+`gopad config` 
+will open the config file for this writer inside `var File = "note.txt` you can change this to a new file,
+the writer will create this file for you just change the name `var File = "newFile.txt"`
+this will write a new file to you writer directory. when ever you what to switch files run `gopad config`
+
 
 
 I have included a bash script that will allow you to call this **Go-PAD** from any directory once included into your `./Bash_Profile`
