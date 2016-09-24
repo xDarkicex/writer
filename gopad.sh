@@ -1,6 +1,6 @@
 #You should add this command to your .bash_Profile replace #{username with your username}
 
-function note() {
+function gopad() {
 username="Your Username goes here"
 version="1.0.0"
 write="writer.go"
