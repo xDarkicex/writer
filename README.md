@@ -2,7 +2,7 @@
 
 ##Go pad allows 
 
-For quick notes to be taken within your terminal.
+For quick notes taken within your terminal.
 `gopad` 
 will run gopad note taker write in a quick note
 
@@ -35,7 +35,7 @@ example:
 please note this will only function if you have a standard goworkspace setup with github.com
 `$GOPATH/src/github.com/xDarkicex/writer/`
 
-once script is inserted into bash profile please run the login command
+load script to bash profile please run the login command
 `bash --login`
 
 This will refresh your terminal with this command you will **not need to exit and restart** your terminal for new bash_profile.

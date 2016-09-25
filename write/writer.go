@@ -30,15 +30,20 @@ func Note() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 
-		fmt.Print("Enter New Note: ")
 		userInput := scanner.Text()
+		fmt.Print("Enter New Note: ")
+
 		if userInput == ":wq" {
-			fmt.Println(" Saving...")
-			fmt.Println("Quiting now")
+			fmt.Printf("\n")
+			fmt.Println("Saving...")
+			fmt.Printf("%s \n", "exiting now...")
+			os.Exit(1)
 			break
+
 		}
 		// Now write the input back to file text.txt
-		file.WriteString(userInput + (time.Now().Format(time.Kitchen)) + "\n")
+
+		file.WriteString(userInput + ", " + (time.Now().Format(time.Kitchen)) + "\n")
 	}
 
 }
