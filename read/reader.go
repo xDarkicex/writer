@@ -20,4 +20,5 @@ func Note() {
 	//Print all not4es to console
 	notes, err := ioutil.ReadAll(file)
 	fmt.Print(string(notes))
+
 }

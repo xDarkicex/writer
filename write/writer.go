@@ -35,15 +35,11 @@ func Note() {
 
 		if userInput == ":wq" {
 			fmt.Printf("\n")
-			fmt.Println("Saving...")
 			fmt.Printf("%s \n", "exiting now...")
-			os.Exit(1)
 			break
-
 		}
 		// Now write the input back to file text.txt
-
-		file.WriteString(userInput + ", " + (time.Now().Format(time.Kitchen)) + "\n")
+		file.WriteString(config.Author + ", " + userInput + ", " + (time.Now().Format(time.Kitchen)) + "\n")
 	}
 
 }
