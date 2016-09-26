@@ -9,6 +9,7 @@ import (
 
 	"github.com/xDarkicex/writer/config"
 	"github.com/xDarkicex/writer/read"
+	"github.com/xDarkicex/writer/server"
 	"github.com/xDarkicex/writer/write"
 )
 
@@ -44,6 +45,8 @@ func main() {
 				main()
 			} else if option == "read" || option == "Read" {
 				Auth()
+			} else if option == "serve" || option == "Serve" || option == "s" {
+				server.Serve()
 			} else if option == "Exit" || option == "exit" {
 				os.Exit(1)
 				break

@@ -39,7 +39,7 @@ func Note() {
 			break
 		}
 		// Now write the input back to file text.txt
-		file.WriteString(config.Author + ", " + userInput + ", " + (time.Now().Format(time.Kitchen)) + "\n")
+		file.WriteString(config.Author + ", " + userInput + ", " + (time.Now().Format("Mon Jan 2 2006")) + ", " + (time.Now().Format(time.Kitchen)) + "\n")
 	}
 
 }

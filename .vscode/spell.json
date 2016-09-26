@@ -10,7 +10,8 @@
     "textedit",
     "newFile",
     "gotxt",
-    "Deflator"
+    "Deflator",
+    "AddNote"
   ],
   "mistakeTypeToStatus": {
     "Passive voice": "Hint",

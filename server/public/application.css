@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    margin-bottom: 60px;
+}
+.jumbotron {
+  background: url('/server/public/wallpaper.png');
+  background-size:cover;
+  background-origin: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 25em;
+}
+header > nav > div > div{
+    display: flex;
+}
+
+body > div > div > form > div > div > h3{
+    text-align: center;
+    color: rgba(255,255,255,1);
+    text-shadow: 1px 1px rgba(0,0,0,0.3);
+}
+
+#newNotes{
+    color: rgba(255,255,255,0.8);
+    text-shadow: 1px 1px rgba(0,0,0,0.5);
+}
+body > div > div > form > div > div > button{
+    float: right;
+    margin-top: 15px;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Go Pad WebView</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/server/public/application.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="display-2"><h2 class="center-block">GO Pad Web Interface</h2>
+                </div>
+            </nav>
+        </header>
+    <div class="jumbotron">
+        <div class="container">
+        <form method="POST" action="/note" onsubmit="event.preventDefault();">
+            <div class="form-group">
+                
+                    <div class="container">
+                        <h3>Add Record</h3>
+                        <input class="form-control" aria-describedby="newNotes" type="text" name="AddNote" placeholder="New Note"></input>
+                        <small id="newNotes">Add New Notes Through web Application</small>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                
+            </div>
+            
+        </form>
+        </div>
+    </div>
+    <main class="container-fluid">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Note</th>
+                <th>Time</th>
+                <th>Date</th>
+        </thead>
+        <tbody>
+            {{range .}}
+                <tr>
+                    <td>{{.Author}}</td>
+                    <td>{{.Note}}</td>
+                    <td>{{.Time}}</td>
+                    <td>{{.Date}}</td>
+                </tr>
+            {{end}}
+        </tbody>
+    </table>
+    </main>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ import (
 var Version = "1.0.0"
 
 //File to be converted to notes
-var File = "note.gotxt"
+var File = "note.csv"
 
 //Author of note
 var Author string
