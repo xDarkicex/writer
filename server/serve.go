@@ -68,6 +68,8 @@ func HandleCSSRequest(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 
 //Serve Fucntion
 func Serve() {
+	s.Say("Listening on: 0.0.0.0:8080")
+	s.Say("Status" + "Good")
 	http.Handle("/server/public/", http.StripPrefix("/server/public/", Fs))
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
@@ -88,9 +90,7 @@ func errorPage(res http.ResponseWriter, req *http.Request) {
 }
 
 func root(res http.ResponseWriter, req *http.Request) {
-	s.Say("Listening on: 0.0.0.0:8080")
-	s.Say("Status" + "Good")
-	s.Say(req.Method + " " + req.RequestURI + " " + req.Proto)
+	s.Say(req.Method + " " + req.Host + " " + req.RequestURI)
 
 	file, err := os.Open(config.File)
 	if err != nil {
