@@ -1,11 +1,14 @@
 package config
 
 import (
-	"bufio"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
+	"strings"
+
+	s "github.com/xDarkicex/GO-CLASS/lazy"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -60,15 +63,14 @@ func SetAuthor() {
 		fmt.Print("failed to openFile")
 		log.Fatal(err)
 	}
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Print("Set New Author: ")
-	for scanner.Scan() {
-		fmt.Print("Set New Author: ")
-		Author := scanner.Text()
-		file.WriteString(Author)
-		defer file.Close()
-		break
+	rawther, err := exec.Command("id", "-F").Output()
+	if err != nil {
+		s.Say("There was an error", err)
 	}
+	Author := strings.Replace(string(rawther), "\n", "", -1)
+	file.WriteString(string(Author))
+	defer file.Close()
+
 }
 
 //Key gets key value out of file
@@ -95,6 +97,7 @@ func GetAuthor() string {
 		//Custom Error handling attempting to repair problem
 		fmt.Println(err)
 		fmt.Println("Can not open author.txt")
+		SetAuthor()
 	}
 	Name, err := ioutil.ReadAll(file)
 	if err != nil {

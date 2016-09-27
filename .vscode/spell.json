@@ -11,7 +11,10 @@
     "newFile",
     "gotxt",
     "Deflator",
-    "AddNote"
+    "AddNote",
+    "Rolofson",
+    "Caaz",
+    "Ragimoff"
   ],
   "mistakeTypeToStatus": {
     "Passive voice": "Hint",

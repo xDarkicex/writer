@@ -2,15 +2,14 @@ package server
 
 import (
 	"encoding/csv"
-	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/xDarkicex/GO-CLASS/lazy"
 	"github.com/xDarkicex/writer/config"
 )
 
@@ -30,11 +29,23 @@ type LineItem struct {
 }
 
 func handler(res http.ResponseWriter, req *http.Request) {
-	fmt.Println(req.RequestURI)
+	// fmt.Println(req.RequestURI)
 	if len(req.RequestURI) == 1 {
+		if req.Method == "POST" {
+			s.Say("New note: ", req.FormValue("AddNote"))
+
+			file, _ := os.OpenFile(config.File, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+			// Close the file when the surrounding function exists
+			defer file.Close()
+			// Now write the input back to file
+			file.WriteString(config.Author + ", " + req.FormValue("AddNote") + ", " + (time.Now().Format("Mon Jan 2 2006")) + ", " + (time.Now().Format(time.Kitchen)) + "\n")
+
+		}
 		root(res)
 	} else {
 		//
+		s.Say(" --> Unhandled request at: ", req.RequestURI, req.Method, " <-- Request")
+		// fmt.Println()
 	}
 }
 
@@ -46,35 +57,12 @@ func HandleCSSRequest(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	w.Header().Set("Content-Type", "text/css;")
 }
 
-//Web Add Notes Via Web interface
-func Web(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Println("Did I fire?")
-	UserInput := req.FormValue("AddNote")
-	file, _ := os.OpenFile(config.File, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
-
-	// Close the file when the surrounding function exists
-	defer file.Close()
-
-	// Read old content
-	current, _ := ioutil.ReadAll(file)
-	if current != nil {
-		fmt.Println("Currently Writing notes to " + config.File)
-	}
-
-	// Now write the input back to file
-	file.WriteString(config.Author + ", " + UserInput + ", " + (time.Now().Format("Mon Jan 2 2006")) + ", " + (time.Now().Format(time.Kitchen)))
-
-}
-
 //Serve Fucntion
-func Serve() *httprouter.Router {
-	router := httprouter.New()
+func Serve() {
 	http.Handle("/server/public/", http.StripPrefix("/server/public/", Fs))
 	http.HandleFunc("/", handler)
-	router.GET("/server/public/", HandleCSSRequest)
-	router.POST("/note", Web)
 	http.ListenAndServe(":8080", nil)
-	return router
+	// return router
 }
 func root(res http.ResponseWriter) {
 
