@@ -32,3 +32,11 @@ load script to bash profile please run the login command
 `bash --login`
 
 This will refresh your terminal with this command you will **not need to exit and restart** your terminal for new bash_profile.
+
+###TODO
+- [ ] Change Note type from csv too json
+- [ ] Create way to search notes
+- [ ] Add edit and destroy methods too notes in web view
+- [ ] Add login and session data for multi user env
+- [ ] Create Desktop app
+- [ ] Make site use AJAX live update site when anyone adds note
