@@ -88,7 +88,10 @@ func errorPage(res http.ResponseWriter, req *http.Request) {
 }
 
 func root(res http.ResponseWriter, req *http.Request) {
-	s.Say("This is Req.URL" + req.RequestURI)
+	s.Say("Listening on: 0.0.0.0:8080")
+	s.Say("Status" + "Good")
+	s.Say(req.Method + " " + req.RequestURI + " " + req.Proto)
+
 	file, err := os.Open(config.File)
 	if err != nil {
 		log.Fatal(err)

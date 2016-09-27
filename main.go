@@ -33,17 +33,17 @@ func main() {
 	} else {
 
 		fmt.Println("Welcome " + Author)
-		fmt.Println("Do you want to Write or Read a Note")
-		fmt.Println("options(Read, Write, Exit)")
+		fmt.Println("Do you want to Write, Read a Note or launch web interface")
+		fmt.Println("options(Read, Write, Serve, Exit)")
 		fmt.Print("Enter Option: ")
 
 		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			option := scanner.Text()
-			if option == "write" || option == "Write" {
+			if option == "write" || option == "Write" || option == "w" {
 				write.Note()
 				main()
-			} else if option == "read" || option == "Read" {
+			} else if option == "read" || option == "Read" || option == "r" {
 				Auth()
 			} else if option == "serve" || option == "Serve" || option == "s" {
 				server.Serve()
