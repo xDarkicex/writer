@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/csv"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -14,10 +15,12 @@ import (
 )
 
 var goHTML *template.Template
+var goHTML2 *template.Template
 
 func init() {
 
 	goHTML = template.Must(template.ParseFiles("server/index.gohtml"))
+	goHTML2 = template.Must(template.ParseFiles("server/error.gohtml"))
 }
 
 //LineItem in note
@@ -30,7 +33,7 @@ type LineItem struct {
 
 func handler(res http.ResponseWriter, req *http.Request) {
 	// fmt.Println(req.RequestURI)
-	if len(req.RequestURI) == 1 {
+	if len(req.RequestURI) >= 1 {
 		if req.Method == "POST" {
 			s.Say("New note: ", req.FormValue("AddNote"))
 
@@ -41,7 +44,13 @@ func handler(res http.ResponseWriter, req *http.Request) {
 			file.WriteString(config.Author + ", " + req.FormValue("AddNote") + ", " + (time.Now().Format("Mon Jan 2 2006")) + ", " + (time.Now().Format(time.Kitchen)) + "\n")
 
 		}
-		root(res)
+		if req.RequestURI == "/error" {
+			s.Say("error URI in handler")
+			errorPage(res, req)
+		}
+		if req.RequestURI == "/" {
+			root(res, req)
+		}
 	} else {
 		//
 		s.Say(" --> Unhandled request at: ", req.RequestURI, req.Method, " <-- Request")
@@ -64,8 +73,22 @@ func Serve() {
 	http.ListenAndServe(":8080", nil)
 	// return router
 }
-func root(res http.ResponseWriter) {
 
+func errorPage(res http.ResponseWriter, req *http.Request) {
+	s.Say("At Error Page")
+	reason := map[string]interface{}{
+		"errorMessage": fmt.Sprint("Error in: " + config.File),
+		"fixError":     ("To fix error in " + config.File + " please check /writer/" + config.File),
+	}
+
+	err := goHTML2.Execute(res, reason)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+func root(res http.ResponseWriter, req *http.Request) {
+	s.Say("This is Req.URL" + req.RequestURI)
 	file, err := os.Open(config.File)
 	if err != nil {
 		log.Fatal(err)
@@ -75,7 +98,8 @@ func root(res http.ResponseWriter) {
 	rdr := csv.NewReader(file)
 	rows, err := rdr.ReadAll()
 	if err != nil {
-		panic(err)
+		s.Say("--> Error in: " + config.File + "<--")
+		http.Redirect(res, req, "/error", 302)
 	}
 	LineItems := make([]LineItem, 0, len(rows))
 	for i, row := range rows {
