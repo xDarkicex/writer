@@ -90,6 +90,7 @@ func errorPage(res http.ResponseWriter, req *http.Request) {
 }
 
 func root(res http.ResponseWriter, req *http.Request) {
+
 	s.Say(req.Method + " " + req.Host + " " + req.RequestURI)
 
 	file, err := os.Open(config.File)
